@@ -1,0 +1,53 @@
+html
+    include includes/head.pug
+    script(src="/js/chart.js")
+    body
+        include includes/navbar.pug
+        .section
+            .container
+                .columns.is-desktop.is-multiline
+                        .column.is-half
+                            .box
+                                h1(class='title') Temperature
+                                each val in temperature
+                                    p=val.value
+                                script.
+                                    /*google.charts.load('current', {'packages':['bar']});
+                                    google.charts.setOnLoadCallback(drawChart);
+
+                                    function drawChart() {
+                                        var data = google.visualization.arrayToDataTable([
+                                            ['Temperatures','Temperature'],
+                                            ['',20],
+                                            ['',15],
+                                            ['',12],
+                                            ['',10],
+                                            ['',16],
+                                            ['',18],
+                                            ['',23]
+                                        ]);
+
+                                        var options = {
+                                            chart: {
+                                                title: 'Temperature over time'
+                                            }
+                                        };
+
+                                        var chart = new google.charts.Bar(document.getElementById('chartDiv'));
+                                        chart.draw(data, google.charts.Bar.convertOptions(options));
+                                    }*/
+                                    console.log();
+
+                                #chartDiv
+                                
+                        .column.is-half
+                            .box
+                                h1(class='title') Humidity
+                                    
+                        .column.is-half
+                            .box
+                                h1(class='title') Distance
+                        
+                        .column.is-half
+                            .box
+                                h1(class='title') Accidents

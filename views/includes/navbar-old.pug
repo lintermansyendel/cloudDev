@@ -1,0 +1,9 @@
+nav(class='navbar is-dark is-desktop', role='navigation', aria-label='main navigation')
+        div(class='navbar-brand')
+            each val in navItems
+                a(class='navbar-item', href=val)
+                    p=val
+            button(class='button navbar-burger is-dark' id='menu') <!-- if menu open add is-active for cross-->
+                span
+                span
+                span 
