@@ -8,11 +8,22 @@ html
                     .column
                         .box
                             h1(class='title') Incidents
-                            p Show latest incident and give a color based on good or something wrong
+                            
                     .column
                         .box
                             h1(class='title') Statistics
-                            p Show a little graph?
+                            table.table.is-bordered.is-centered
+                                    thead
+                                        tr
+                                            th Date
+                                            th Temperature
+                                    tbody
+                                        - var n = 0;
+                                        while n < 10
+                                            tr
+                                                td=temperature[n].date
+                                                td=temperature[n].temp+"°C"
+                                                - n++
                     .column
                         .box
                             h1(class='title') Settings
