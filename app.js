@@ -24,31 +24,39 @@ function getTemp() {
     .then(result => { /*console.log(result.data); */return result; })
     .catch(error => { console.log(error); throw error;})
 }
-
+/*
 function getHumidity() {
-  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
   
   return req
-    .then(result => { /*console.log(result.data); */return result; })
+    .then(result => { return result; })
+    .catch(error => { console.log(error); throw error;})
+}*/
+
+function getAccidents() {
+  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/obstacle/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+  
+  return req
+    .then(result => { return result; })
     .catch(error => { console.log(error); throw error;})
 }
 
 app.get(['/','/Home'], function (req, res) {
-  var tempData = getTemp();
-  var humData = getHumidity();
+  /*var tempData = getTemp();
+  var humData = getHumidity();*/
 
-  tempData.then(result => {
+  /*tempData.then(result => {
     var temp = [];
     result.data.results.forEach(function(item){
       var time = moment(item.created_at).format('LL');
       var obj = {'temp':item.value,'date':time}
       temp.push(obj);
     });
-    res.render('index', {title: title, navItems: navItems, temperature: temp});
+    res.render('index', {title: title, navItems: navItems, temperature: temp, humidity: [{temp:"cold",date:"today"}]});
   })
   .catch(error => {
     res.render('stats',{title:title, navItems:navItems, temperature:[{temp:"cold",date:"today"}]});
-  });
+  });*/
   
 });
 
@@ -57,7 +65,7 @@ app.get('/Incidents', function(req, res) {
 });
 
 app.get('/Stats', function(req, res) {
-  var tempData = getTemp();
+  /*var tempData = getTemp();
   var humData = getHumidity();
 
   tempData.then(result => {
@@ -67,12 +75,21 @@ app.get('/Stats', function(req, res) {
       var obj = {'temp':item.value,'date':time}
       temp.push(obj);
     });
-    res.render('stats', {title: title, navItems: navItems, temperature: temp, humidity: humData.then(result => { return result.data.results})})
-    console.log(result.data.results);
-  })
-  .catch(error => {
-    res.render('stats',{title:title, navItems:navItems, temperature:[{temp:"cold",date:"today"}], humidity:[{hum:"dry",date:"today"}]});
+    res.render('stats', {title: title, navItems: navItems});
+  });*/
+  var accidentData = getAccidents();
+  accidentData.then(result => {
+    var acc = [];
+    console.log(accidentData);
+    result.data.results.forEach(element => {
+      var time = moment(element.created_at).format('LL');
+      var obj = {'date': time};
+      acc.push(obj);
+    });
+    console.log(acc);
+    res.render('stats', {title: title, navItems: navItems, accidents: acc});
   });
+  //res.render('stats', {title: title, navItems: navItems});
 });
 
 app.get('/Settings', function(req, res) {

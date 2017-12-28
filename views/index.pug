@@ -12,19 +12,11 @@ html
                     .column
                         .box
                             h1(class='title') Statistics
-                            table.table.is-bordered.is-centered
-                                    thead
-                                        tr
-                                            th Date
-                                            th Temperature
-                                    tbody
-                                        - var n = 0;
-                                        while n < 10
-                                            tr
-                                                td=temperature[n].date
-                                                td=temperature[n].temp+"°C"
-                                                - n++
+                            
                     .column
                         .box
                             h1(class='title') Settings
                             p Show some quick settings that are useful for easy access
+                            div.field
+                                input(id="switchOutlinedDefault" type="checkbox" name="switchOutlinedDefault" class="switch is-outlined is-success")
+                                label(for="switchOutlinedDefault") Drive

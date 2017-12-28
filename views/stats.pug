@@ -10,22 +10,20 @@ html
             .container
                             .box
                                 h1(class='title') Temperature
-                                #chart            
+                                #tempchart            
                             .box
                                 h1(class='title') Humidity
-                                table.table.is-bordered.is-centered
-                                    thead
-                                        tr
-                                            th Date
-                                            th Humidity
-                                    tbody
-                                        each val in humidity
-                                            tr
-                                                td=val.date
-                                                td=val.hum+"%"
+                                #humchart
                                     
                             .box
                                 h1(class='title') Distance
                         
                             .box
-                                h1(class='title') Accidents
+                                h1(class='title') Incidents
+                                p.has-text-weight-bold Latest accident: 
+                                p=accidents[0].date
+                                p.has-text-weight-bold Number of incidents: 
+                                - var all = 0;
+                                each val in accidents
+                                    - all++
+                                p=all
