@@ -88,7 +88,7 @@ app.get('/Settings', function(req, res) {
 });
 
 const httpServer = http.createServer(app);
-httpServer.listen(1337, function(){
-  let port = httpServer.address().port || 3000;
+let port = process.env.PORT || 3000;
+httpServer.listen(port, function(){
   console.log('\n > Server is listening at port %s', port,'\n');
 });
