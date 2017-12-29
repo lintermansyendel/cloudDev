@@ -15,23 +15,23 @@ app.use(express.static(__dirname+'/public'));
 moment.locale('nl-be');
 
 var title = 'Surveillance Car';
-var navItems = ['Home','Incidents','Stats','Settings'];
+var navItems = ['Home','Stats','Settings'];
 
-function getTemp() {
-  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
-  
-  return req
-    .then(result => { /*console.log(result.data); */return result; })
-    .catch(error => { console.log(error); throw error;})
-}
-/*
-function getHumidity() {
-  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+function getLastTemperature() {
+  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/values/?page_size=1&token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
   
   return req
     .then(result => { return result; })
     .catch(error => { console.log(error); throw error;})
-}*/
+}
+
+function getLastHumidity() {
+  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/values/?page_size=1&token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+  
+  return req
+    .then(result => { return result; })
+    .catch(error => { console.log(error); throw error;})
+}
 
 function getAccidents() {
   const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/obstacle/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
@@ -40,47 +40,39 @@ function getAccidents() {
     .then(result => { return result; })
     .catch(error => { console.log(error); throw error;})
 }
+function getLastAccident() {
+  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/obstacle/values/?page_size=1&token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+
+  return req
+  .then(result => { return result; })
+  .catch(error => { console.log(error); throw error;})
+}
 
 app.get(['/','/Home'], function (req, res) {
-  /*var tempData = getTemp();
-  var humData = getHumidity();*/
-
-  /*tempData.then(result => {
-    var temp = [];
-    result.data.results.forEach(function(item){
-      var time = moment(item.created_at).format('LL');
-      var obj = {'temp':item.value,'date':time}
-      temp.push(obj);
-    });
-    res.render('index', {title: title, navItems: navItems, temperature: temp, humidity: [{temp:"cold",date:"today"}]});
+  getLastAccident().then(result => {
+    console.log(result.data.results[0]);
+    var time = moment(result.data.results[0].created_at).format('LLL');
+    var obj = {'time':time};
+    getLastTemperature().then(result2 => {
+      var time2 = moment(result2.data.results[0].created_at).format('LL');
+      var temp = result2.data.results[0].value;
+      var obj2 = {'time':time2,'data':temp};
+      getLastHumidity().then(result3 => {
+        var time3 = moment(result3.data.results[0].created_at).format('LL');
+        var hum = result3.data.results[0].value;
+        var obj3 = {'time':time3,'data':hum};
+        res.render('index',{title:title, navItems:navItems, la: obj, temp:obj2, hum:obj3});
+      })
+    })
+    
   })
-  .catch(error => {
-    res.render('stats',{title:title, navItems:navItems, temperature:[{temp:"cold",date:"today"}]});
-  });*/
-  
-});
 
-app.get('/Incidents', function(req, res) {
-  res.render('incidents', {title: title, navItems: navItems});
 });
 
 app.get('/Stats', function(req, res) {
-  /*var tempData = getTemp();
-  var humData = getHumidity();
-
-  tempData.then(result => {
-    var temp = [];
-    result.data.results.forEach(function(item){
-      var time = moment(item.created_at).format('LL');
-      var obj = {'temp':item.value,'date':time}
-      temp.push(obj);
-    });
-    res.render('stats', {title: title, navItems: navItems});
-  });*/
   var accidentData = getAccidents();
   accidentData.then(result => {
     var acc = [];
-    console.log(accidentData);
     result.data.results.forEach(element => {
       var time = moment(element.created_at).format('LL');
       var obj = {'date': time};
@@ -89,7 +81,6 @@ app.get('/Stats', function(req, res) {
     console.log(acc);
     res.render('stats', {title: title, navItems: navItems, accidents: acc});
   });
-  //res.render('stats', {title: title, navItems: navItems});
 });
 
 app.get('/Settings', function(req, res) {

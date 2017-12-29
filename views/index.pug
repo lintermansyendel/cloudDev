@@ -8,15 +8,14 @@ html
                     .column
                         .box
                             h1(class='title') Incidents
-                            
+                            p Last incident was at: 
+                                =la.time
                     .column
                         .box
                             h1(class='title') Statistics
-                            
-                    .column
-                        .box
-                            h1(class='title') Settings
-                            p Show some quick settings that are useful for easy access
-                            div.field
-                                input(id="switchOutlinedDefault" type="checkbox" name="switchOutlinedDefault" class="switch is-outlined is-success")
-                                label(for="switchOutlinedDefault") Drive
+                            p Temperature at 
+                                =temp.time + " was: " 
+                                =temp.data +"°C"
+                            p Humidity at 
+                                =hum.time + " was: " 
+                                =hum.data +"%"

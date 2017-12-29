@@ -1,7 +1,6 @@
 html
     include includes/head.pug
     script(src='/js/moment.js')
-    script(src="https://unpkg.com/axios/dist/axios.min.js")
     script(src="https://www.gstatic.com/charts/loader.js")
     script(src='/js/chart.js')
     body
@@ -14,10 +13,6 @@ html
                             .box
                                 h1(class='title') Humidity
                                 #humchart
-                                    
-                            .box
-                                h1(class='title') Distance
-                        
                             .box
                                 h1(class='title') Incidents
                                 p.has-text-weight-bold Latest accident: 

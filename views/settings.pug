@@ -2,3 +2,16 @@ html
     include includes/head.pug
     body
         include includes/navbar.pug
+        .section
+            .container
+                .box
+                    h1(class='title') To go or not to go?
+                    div.field
+                        input(id="switchOutlinedDefault" type="checkbox" name="switchOutlinedDefault" class="switch is-outlined is-success")
+                        label(for="switchOutlinedDefault") Go
+                .box
+                    h1(class='title') Get temperature and humidity at this moment.
+                    div(class="button is-primary is-outlined", onclick='getValues()') GET THEM!
+                    #values
+                
+            
