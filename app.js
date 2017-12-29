@@ -48,6 +48,14 @@ function getLastAccident() {
   .catch(error => { console.log(error); throw error;})
 }
 
+function getLastPickedup() {
+  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/pickedup/lv?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+  
+  return req
+    .then(result => { return result; })
+    .catch(error => { console.log(error); throw error;})
+}
+
 app.get(['/','/Home'], function (req, res) {
   getLastAccident().then(result => {
     console.log(result.data.results[0]);
@@ -61,7 +69,10 @@ app.get(['/','/Home'], function (req, res) {
         var time3 = moment(result3.data.results[0].created_at).format('LL');
         var hum = result3.data.results[0].value;
         var obj3 = {'time':time3,'data':hum};
-        res.render('index',{title:title, navItems:navItems, la: obj, temp:obj2, hum:obj3});
+        getLastPickedup().then(result4 => {
+          var obj4 = {'data':result4.data}
+          res.render('index',{title:title, navItems:navItems, la: obj, temp:obj2, hum:obj3, safe:obj4});
+        });
       })
     })
     

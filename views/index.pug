@@ -19,3 +19,10 @@ html
                             p Humidity at 
                                 =hum.time + " was: " 
                                 =hum.data +"%"
+                    .column
+                        .box
+                            h1(class='title') Is my car safe?
+                            - if (safe.data === 1)
+                                p.has-text-danger No, someone picked it up.
+                            - else
+                                p.has-text-succes Yes, no need to worry.
