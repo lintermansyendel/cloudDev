@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(drawTempChart);
 google.charts.setOnLoadCallback(drawHumChart);
 
 function getTemp() {
-    const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+    const req = axios.get('https://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
     
     return req
         .then(result => { return result; })
@@ -44,7 +44,7 @@ async function drawTempChart() {
 }
 
 function getHum() {
-  const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+  const req = axios.get('https://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/values?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
   
   return req
       .then(result => { return result; })
