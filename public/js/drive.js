@@ -4,7 +4,7 @@ window.onload=function(){
 }
 function setDrive() {
     if(this.checked) {
-        axios.post('http://things.ubidots.com/api/v1.6/devices/surveillancecar/drive/values/?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y',
+        axios.post('https://things.ubidots.com/api/v1.6/devices/surveillancecar/drive/values/?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y',
         {
             "value": 1
         })
@@ -14,7 +14,7 @@ function setDrive() {
         .catch(err => {console.log(err)});
     } else {
         // Checkbox is not checked..
-        axios.post('http://things.ubidots.com/api/v1.6/devices/surveillancecar/drive/values/?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y',
+        axios.post('https://things.ubidots.com/api/v1.6/devices/surveillancecar/drive/values/?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y',
         {
             "value": 0
         })
