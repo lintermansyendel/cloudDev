@@ -54,8 +54,19 @@ async function getValues() {
 
     document.getElementById('values').innerHTML = "Temperature: " + data.temp + "°C\nHumidity: " + data.hum + "%";
 
+    if(!document.getElementById('box')){
+        fetchIsHotOrNot();
+    } else {
+        var box = document.getElementById('box');
+        box.parentNode.removeChild(box);
+        fetchIsHotOrNot();
+    }
+}
+
+function fetchIsHotOrNot() {
     var box = document.createElement('div');
     box.className = "box";
+    box.id = "box";
     var h1 = document.createElement('h1');
     h1.className = "title is-1";
     h1.innerHTML = "Hot or Not?"
