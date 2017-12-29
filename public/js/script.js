@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function getLastTemp() {
-    const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/lv?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+    const req = axios.get('https://things.ubidots.com/api/v1.6/devices/surveillancecar/temperature/lv?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
     
     return req
         .then(result => { return result; })
@@ -25,7 +25,7 @@ function getLastTemp() {
 }
 
 function getLastHum() {
-    const req = axios.get('http://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/lv?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
+    const req = axios.get('https://things.ubidots.com/api/v1.6/devices/surveillancecar/humidity/lv?token=A1E-yz1uifC28k1uUWlvVQNUI40TCNXB6y')
     
     return req
         .then(result => { return result; })
