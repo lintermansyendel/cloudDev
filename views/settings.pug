@@ -1,5 +1,6 @@
 html
     include includes/head.pug
+    script(src="/js/drive.js")
     body
         include includes/navbar.pug
         .section
@@ -7,8 +8,8 @@ html
                 .box
                     h1(class='title') To go or not to go?
                     div.field
-                        input(id="switchOutlinedDefault" type="checkbox" name="switchOutlinedDefault" class="switch is-outlined is-success")
-                        label(for="switchOutlinedDefault") Go
+                        input(id="driveSwitch" type="checkbox" name="driveSwitch" class="switch is-outlined is-success")
+                        label(for="driveSwitch") Go
                 .box
                     h1(class='title') Get temperature and humidity at this moment.
                     div(class="button is-primary is-outlined", onclick='getValues()') GET THEM!
