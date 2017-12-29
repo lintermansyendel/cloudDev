@@ -89,6 +89,6 @@ app.get('/Settings', function(req, res) {
 
 const httpServer = http.createServer(app);
 httpServer.listen(1337, function(){
-  var port = httpServer.address().port;
+  let port = httpServer.address().port || 3000;
   console.log('\n > Server is listening at port %s', port,'\n');
 });
